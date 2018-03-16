@@ -33,8 +33,7 @@ engel <- function(object = object, file = FALSE, sd = FALSE, lim.y = FALSE) {
 
   n <- length(object$log.exp)
 
-  temp <- intermediate.blocs(object, log.price = object$log.price,
-                             var.soc = object$var.soc, log.exp = object$log.exp)
+  temp <- intermediate.blocs(object)
   my.array <- temp$my.array
   bjk <- temp$bjk
   P <- temp$P
@@ -45,7 +44,7 @@ engel <- function(object = object, file = FALSE, sd = FALSE, lim.y = FALSE) {
   hjt <- temp$hjt
   cc <- temp$cc
   noms <- temp$noms
-  lnx <- temp$log.exp
+  lnx <- object$log.exp
   y <- temp$y
 
   result <- list()
@@ -62,9 +61,11 @@ engel <- function(object = object, file = FALSE, sd = FALSE, lim.y = FALSE) {
       tot3 <- tot3 + tempo
     }
 
-    for (j in 1:nsoc) {
-      tempo <- gjt[j, i] * Z[, j + 1]
-      tot4 <- tot4 + tempo
+    if (nsoc) {
+      for (j in 1:nsoc) {
+        tempo <- gjt[j, i] * Z[, j + 1]
+        tot4 <- tot4 + tempo
+      }
     }
 
     if (zy.inter) {
@@ -107,8 +108,10 @@ engel <- function(object = object, file = FALSE, sd = FALSE, lim.y = FALSE) {
       MAT <- cbind(MAT, y^i)
     }
 
-    for (i in 1:nsoc) {
-      MAT <- cbind(MAT, Z[, i + 1])
+    if (nsoc) {
+      for (i in 1:nsoc) {
+        MAT <- cbind(MAT, Z[, i + 1])
+      }
     }
 
     if (zy.inter) {

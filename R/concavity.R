@@ -22,8 +22,7 @@ concavity <- function(object = object) {
 
   n <- length(log.exp)
 
-  temp <- intermediate.blocs(object, log.price = log.price, var.soc = var.soc,
-    log.exp = log.exp)
+  temp <- intermediate.blocs(object)
   my.array <- temp$my.array
   tot <- temp$tot
   tot2 <- temp$tot2
@@ -48,7 +47,7 @@ concavity <- function(object = object) {
 
   # Labels or names of the equations:
   noms <- c()
-  for (i in 1:neq) noms <- c(noms, paste("eq", i, sep = ""))
+  for (i in 1:neq) noms <- c(noms, paste0("eq", i))
 
   # ***** new price Matrix *******
   P = log.price
@@ -342,8 +341,8 @@ concavity <- function(object = object) {
 
   for (i in (10:1)/10) {
     if (mean(testconcav) <= i)
-      a <- paste(" Result: The cost function is concave on more than ", (i -
-        0.1) * 100, "% of the sample. ", sep = "")
+      a <- paste0(" Result: The cost function is concave on more than ", (i -
+        0.1) * 100, "% of the sample. ")
   }
 
   cat("\n")

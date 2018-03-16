@@ -3,7 +3,7 @@ vcov.easi <- function(object = object, ...) {
   VARS <- object$VARS
   VARS2 <- c()
   for (i in 1:neq) {
-    VARS2 <- c(VARS2, paste(paste("eq", i, sep = ""), VARS, sep = "_"))
+    VARS2 <- c(VARS2, paste(paste0("eq", i), VARS, sep = "_"))
   }
   tp <- object$CoefCov
   colnames(tp) <- rownames(tp) <- VARS2
